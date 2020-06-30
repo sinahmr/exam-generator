@@ -34,7 +34,7 @@ with open(main_tex_path, 'r') as f:
         header, document = f.read().split(hide_solutions_tag)
     else:
         header, document = '', f.read()
-    beginning, end = document.split(contents_indicator)
+    beginning, end = document.split(content_indicator)
 
 # Parse questions
 pools = list()

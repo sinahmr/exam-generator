@@ -17,7 +17,7 @@ std_ids = ['0001', '0002', '0003']
 # Options
 print_after_every_question = '\n\n\hrulefill'
 
-contents_indicator = '% CONTENT %'
+content_indicator = '% CONTENT %'
 
 generate_solutions = True
 hide_solutions_tag = '\hidesolutions'
