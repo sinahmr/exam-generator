@@ -30,7 +30,10 @@ os.system('mkdir -p %s && mkdir -p %s' % (exams_dir, solutions_dir))
 
 # Parse the main file
 with open(main_tex_path, 'r') as f:
-    header, document = f.read().split(hide_solutions_tag)
+    if generate_solutions:
+        header, document = f.read().split(hide_solutions_tag)
+    else:
+        header, document = '', f.read()
     beginning, end = document.split(contents_indicator)
 
 # Parse questions
