@@ -65,10 +65,11 @@ for std_id in std_ids:
 
 # Store stats
 with open(stats_path, 'w') as f:
-    f.write('STD IDs and passwords:\n')
-    for pair in zip(std_ids, passwords):
-        f.write('%s:\t%s\n' % pair)
-    f.write('\n---\n\n')
+    if compress:
+        f.write('STD IDs and passwords:\n')
+        for pair in zip(std_ids, passwords):
+            f.write('%s:\t%s\n' % pair)
+        f.write('\n---\n\n')
 
     f.write('Intersections (Out of %d possible pairs):\n' % (len(std_ids) * (len(std_ids) - 1) / 2))
     intersection_bin_count = get_intersection_bin_count(student_qs_index_mapping)
@@ -103,9 +104,11 @@ for std_id in std_ids:
     os.chdir(cwd)
 
 # Compress with passwords
-for std_id, password in zip(std_ids, passwords):
-    os.system('zip --password %s -j %s%s.zip %s%s.pdf' % (password, exams_dir, std_id, exams_dir, std_id))
+if compress:
+    for std_id, password in zip(std_ids, passwords):
+        os.system('zip --password %s -j %s%s.zip %s%s.pdf' % (password, exams_dir, std_id, exams_dir, std_id))
 
 # Cleaning up
+os.system('rm %s %s' % (exam_tex_path, solution_tex_path))
 os.system('rm %s*.log %s*.aux' % (exams_dir, exams_dir))
-os.system('rm %s*.log %s*.aux' % (solutions_dir, solutions_dir))
+os.system('rm %s*.log %s*.aux || true' % (solutions_dir, solutions_dir))
