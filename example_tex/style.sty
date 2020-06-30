@@ -1,0 +1,43 @@
+\usepackage{setspace}
+\usepackage{amssymb}
+\usepackage{tagging}
+
+\setlength{\oddsidemargin}{.25in}
+\setlength{\evensidemargin}{.25in}
+\setlength{\textwidth}{6.25in}
+\setlength{\topmargin}{-0.6in}
+\setlength{\textheight}{9in}
+\setlength{\parindent}{0in}
+\bibliographystyle{plain}
+
+\newcommand{\heading}[5]{
+   \begin{center}
+   \framebox[\textwidth]{
+     \begin{minipage}{0.9\textwidth} \onehalfspacing
+       {\bf  #1} \hfill #2
+
+       {\centering \Large #3
+       
+       }\medskip
+
+       {\it #4 \hfill #5}
+     \end{minipage}
+   }
+   \end{center}
+}
+
+\newtheorem{question}{Question}
+\newenvironment{solution}{
+    \taggedblock{showsolutions}
+    \hfill \\
+    {\bf Answer.} \\
+}{
+    \tagged{showsolutions}{
+	\begin{flushright}
+    	$\lhd$ \\ 
+	\end{flushright}
+}
+    \endtaggedblock
+}
+\usetag{showsolutions}
+\newcommand{\hidesolutions}{\droptag{showsolutions}}
